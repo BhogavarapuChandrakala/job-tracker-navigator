@@ -23,21 +23,21 @@ const dateSortOptions = [
 ];
 
 const JobFilter: React.FC<JobFilterProps> = ({ onFilterChange }) => {
-  const [status, setStatus] = useState<JobStatus | "">("");
+  const [status, setStatus] = useState<JobStatus | "all">("all");
   const [dateSort, setDateSort] = useState<string>("newest");
 
-  const handleStatusChange = (value: JobStatus | "") => {
+  const handleStatusChange = (value: JobStatus | "all") => {
     setStatus(value);
-    onFilterChange({ status: value || undefined, dateSort });
+    onFilterChange({ status: value === "all" ? undefined : value, dateSort });
   };
 
   const handleDateSortChange = (value: string) => {
     setDateSort(value);
-    onFilterChange({ status: status || undefined, dateSort: value });
+    onFilterChange({ status: status === "all" ? undefined : status, dateSort: value });
   };
 
   const clearFilters = () => {
-    setStatus("");
+    setStatus("all");
     setDateSort("newest");
     onFilterChange({});
   };
@@ -50,13 +50,13 @@ const JobFilter: React.FC<JobFilterProps> = ({ onFilterChange }) => {
         </Label>
         <Select 
           value={status} 
-          onValueChange={(value) => handleStatusChange(value as JobStatus | "")}
+          onValueChange={(value) => handleStatusChange(value as JobStatus | "all")}
         >
           <SelectTrigger id="status-filter">
             <SelectValue placeholder="All Statuses" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All Statuses</SelectItem>
+            <SelectItem value="all">All Statuses</SelectItem>
             {statusOptions.map((status) => (
               <SelectItem key={status} value={status}>
                 {status}
