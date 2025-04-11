@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 // This component is only for development and testing
 // It allows setting the API URL without hard-coding it
 
-const API_URL_KEY = "job_tracker_api_url";
+const API_URL_KEY = "https://job-tracker-backend-ry8d.onrender.com";
 
 export const getApiUrl = (): string => {
   if (typeof window === "undefined") return "";
@@ -17,7 +17,7 @@ export const getApiUrl = (): string => {
   if (saved) return saved;
   
   // Default URL - replace with your production backend URL when deploying
-  return "http://localhost:5000/api/jobs";
+  return "https://job-tracker-backend-ry8d.onrender.com/api/jobs";
 };
 
 export const setApiUrl = (url: string): void => {
